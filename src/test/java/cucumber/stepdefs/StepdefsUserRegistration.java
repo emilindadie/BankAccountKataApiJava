@@ -39,7 +39,7 @@ public class StepdefsUserRegistration{
     public void he_want_to_register_himself() {
         WebTestClient.ResponseSpec response = webClient
                 .post()
-                .uri("3001/user")
+                .uri("localhost:3001/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .body(BodyInserters.fromObject(context.givenObject(User.class)))
                 .exchange();

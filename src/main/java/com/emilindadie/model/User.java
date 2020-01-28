@@ -68,4 +68,5 @@ public  class User implements Serializable {
 	public Boolean validProperty() {
 		return !this.name.isEmpty() && !this.email.isEmpty() &&  !this.address.isEmpty() && !this.password.isEmpty();
 	}
+	
 }

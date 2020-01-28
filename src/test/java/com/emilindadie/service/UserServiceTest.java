@@ -9,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.emilindadie.dao.UserDao;
 import com.emilindadie.exception.ErrorException;
 import com.emilindadie.model.User;
-import com.emilindadie.model.UserDao;
 import com.emilindadie.service.UserService;
 
 import org.assertj.core.api.Assertions;
@@ -32,9 +32,8 @@ public class UserServiceTest {
 	public void setUp() throws Exception {
 	}
 	
-	
 	@Test
-	public void should_return_an_user_when_having_valid_user_property(){
+	public void should_signup_a_user_when_having_valid_signup_user_property(){
 		// Arrange
 		User user = new User();
 		user.setId(1);
@@ -46,18 +45,44 @@ public class UserServiceTest {
         
 		try {
 			// Act
-	        User savedUser = service.createUser(user);
+	        User signUpUser = service.signUpUser(user);
 	        
 	        // Assert
-	        Assertions.assertThat(savedUser.getId()).isNotNull();
+	        Assertions.assertThat(signUpUser.getId()).isNotNull();
 		} catch(ErrorException e) {
 		}
 	}
 	
 	@Test
-	public void should_throw_an_exception_when_having_invalid_user_property(){
+	public void should_throw_an_exception_when_having_invalid_signup_user_property(){
 		try {
-	        User savedUser = service.createUser(new User());
+	        User signUpUser = service.signUpUser(new User());
+		} catch(ErrorException e) {
+	        Assertions.assertThat(e instanceof ErrorException);
+		}
+	}
+	
+	@Test
+	public void should_signin_a_user_when_having_valid_signin_user_value(){
+		String email = "toto@gmail.com";
+		String password = "azerty";
+		User user = new User();
+		user.setId(1);
+		
+        Mockito.when(dao.findByEmail(email)).thenReturn(user);
+        
+		try {
+	        User signInUser = service.signInUser(email, password);
+	        Assertions.assertThat(signInUser.getId()).isNotNull();
+		} catch(ErrorException e) {
+		}
+	}
+	
+	@Test
+	public void should_throw_an_exception_when_having_invalid_signin_user_value(){
+		try {
+	        User signInUser = service.signInUser("", "");
+	        Assertions.assertThat(signInUser.getId()).isNotNull();
 		} catch(ErrorException e) {
 	        Assertions.assertThat(e instanceof ErrorException);
 		}
