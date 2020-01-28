@@ -2,7 +2,6 @@ package cucumber.stepdefs;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -26,10 +25,13 @@ public class StepdefsUserRegistration{
 
     private StepDefsContext context = StepDefsContext.CONTEXT;
 
-    
     @Given("a user of name (.*) and of email (.*) and of address (.*) and of password (.*)")
     public void a_user_of_information(String name, String email, String address, String password) {
-    	User user = new User(name, email, address, password);
+    	User user = new User();
+    	user.setName(name);
+    	user.setEmail(email);
+    	user.setAddress(address);
+    	user.setPassword(password);
         context.givenObject(user, User.class);
     }
 
@@ -51,7 +53,7 @@ public class StepdefsUserRegistration{
                 .isCreated()
                 .expectHeader()
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .expectBody(User.class).value(u -> u.getName().equals("Xiaomi"));
+                .expectBody(User.class).value(u -> u.getName().equals("Emilin"));
 
     }
 }

@@ -1,28 +1,45 @@
 package com.emilindadie.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class User {
-	private UUID uid;
-    private String name;
-    private String email;
-    private String password;
-    private String address;
-    
-    
-    public User(String name, String email, String address, String password) {
-    	this.name = name;
-    	this.email = email;
-    	this.address = address;
-    	this.password = password;	
-    } 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 
-	public UUID getUid() {
-		return uid;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+
+@Entity
+public  class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+    @GeneratedValue
+    private int id;
+	
+	@Column()
+    private String name = "";
+	@Column()
+    private String email = "";
+	@Column()
+    private String password = "";
+	@Column()
+    private String address = "";
+    
+    
+	public int getId() {
+		return id;
 	}
-	public void setUid(UUID uid) {
-		this.uid = uid;
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
 	public String getName() {
 		return name;
 	}
@@ -46,5 +63,9 @@ public class User {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public Boolean validProperty() {
+		return !this.name.isEmpty() && !this.email.isEmpty() &&  !this.address.isEmpty() && !this.password.isEmpty();
 	}
 }
