@@ -5,11 +5,11 @@ server:
 # DataSource
 spring:
   datasource:
-    username: root
+    username: travis
     initialize-mode: true
-    password: root
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:8889/bankaccountjava?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/bankaccount?autoReconnect=true&useSSL=false
   jpa:
     hibernate:
       ddl-auto: update
