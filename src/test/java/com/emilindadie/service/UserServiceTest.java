@@ -27,7 +27,6 @@ public class UserServiceTest {
 	@MockBean
 	UserDao dao;
 
-
 	@Before
 	public void setUp() throws Exception {
 	}
