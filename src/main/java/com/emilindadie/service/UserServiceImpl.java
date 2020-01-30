@@ -18,9 +18,9 @@ public class UserServiceImpl implements UserService{
     private PasswordEncoder passwordEncoder;
 
 	@Override
-	public User signUpUser(User user) throws ErrorException{
+	public User signUpUser(User user) throws ErrorException {
+		System.out.println("Onnne");
 		if(user.validProperty()) {
-			System.out.println(user.getEmail());
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			return dao.save(user);
 		} 
@@ -36,10 +36,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User signInUser(String email, String password) throws ErrorException {
 		if(validSignInUserValue(email, password)) {
+			System.out.println(email);
+			System.out.println(password);
 			User loginUser = dao.findByEmail(email);
-			if(loginUser != null && passwordEncoder.matches(loginUser.getPassword(), password)) {
+			System.out.println(loginUser.getPassword());
+			if(loginUser != null && passwordEncoder.matches(password, loginUser.getPassword())) {
 				return loginUser;  
-			} 
+			}
 			throw new ErrorException("failed to login", "Wrong email or password");
 		} else {
 			throw new ErrorException("failed to login", "Email and password is required");

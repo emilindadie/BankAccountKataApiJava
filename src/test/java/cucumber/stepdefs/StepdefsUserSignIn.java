@@ -1,11 +1,13 @@
 package cucumber.stepdefs;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
+import com.emilindadie.dto.SignInDto;
 import com.emilindadie.model.User;
 
 import cucumber.api.java.en.Given;
@@ -15,6 +17,7 @@ import lombok.extern.java.Log;
 
 
 @Log
+@AutoConfigureWebTestClient(timeout = "10000")//10 seconds
 public class StepdefsUserSignIn{
 
     @LocalServerPort
@@ -27,24 +30,19 @@ public class StepdefsUserSignIn{
 
     @Given("a user of email (.*) and of password (.*)")
     public void a_user_of_information(String email, String password) {
-    	User user = new User();
-    	user.setEmail(email);
-    	user.setPassword(password);
-        context.givenObject(user, User.class);
+    	SignInDto data = new SignInDto();
+    	data.setEmail("dadie.emilin@gmail.com");
+    	data.setPassword("azerty");
+        context.givenObject(data, SignInDto.class);
     }
 
     @When("he want to signin to the system")
     public void he_want_to_sign_in_to_the_system() {
-    	User user = context.givenObject(User.class);
         WebTestClient.ResponseSpec response = webClient
                 .post()
-                .uri(uriBuilder ->
-                uriBuilder
-                        .path("localhost:3001/user/login")
-                        .queryParam("email", user.getEmail())
-                        .queryParam("password", user.getPassword())
-                        .build())
+                .uri("localhost:3001/user/login")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .body(BodyInserters.fromObject(context.givenObject(SignInDto.class)))
                 .exchange();
         context.thenObject(response, WebTestClient.ResponseSpec.class);
     }

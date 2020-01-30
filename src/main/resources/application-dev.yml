@@ -1,0 +1,27 @@
+
+server:
+  port: 3001
+
+# DataSource
+spring:
+  datasource:
+    username: root
+    initialize-mode: true
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8889/bankaccountjava?autoReconnect=true&useSSL=false
+  jpa:
+    hibernate:
+      ddl-auto: update
+#spring.jpa.database-platform: org.hibernate.dialect.MySQLDialect
+
+# Show or not log for each sql query
+    show-sql: true
+
+# Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+# stripped before adding them to the entity manager)
+
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect

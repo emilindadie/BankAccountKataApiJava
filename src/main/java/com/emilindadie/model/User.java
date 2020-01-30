@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 
+import com.emilindadie.dto.SignUpDto;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public  class User implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -67,6 +69,14 @@ public  class User implements Serializable {
 	
 	public Boolean validProperty() {
 		return !this.name.isEmpty() && !this.email.isEmpty() &&  !this.address.isEmpty() && !this.password.isEmpty();
+	}
+	
+	
+	public void fromDto(SignUpDto data) {
+		this.name = data.getName();
+		this.email = data.getEmail();
+		this.address = data.getAddress();
+		this.password = data.getPassword();
 	}
 	
 }

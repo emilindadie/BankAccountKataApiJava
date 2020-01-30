@@ -14,6 +14,9 @@ import com.emilindadie.exception.ErrorException;
 import com.emilindadie.model.User;
 import com.emilindadie.service.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 
 
@@ -67,9 +70,8 @@ public class UserServiceTest {
 		String password = "azerty";
 		User user = new User();
 		user.setId(1);
-		
+				
         Mockito.when(dao.findByEmail(email)).thenReturn(user);
-        
 		try {
 	        User signInUser = service.signInUser(email, password);
 	        Assertions.assertThat(signInUser.getId()).isNotNull();

@@ -14,7 +14,6 @@ public class UserTest {
 	public void setUp() throws Exception {
 	}
 	
-	
 	@Test
 	public void should_return_true_when_having_valid_user_property(){
 		// Arrange
