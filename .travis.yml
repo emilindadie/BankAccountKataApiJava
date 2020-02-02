@@ -1,8 +1,5 @@
 language: java
 jdk:
  - openjdk8
-install:
-- mvn install -P prod
 script:
-- mvn test
-- mvn clean verify
+- ./mvnw clean install -P prod -B
