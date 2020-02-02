@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.emilindadie.dao.UserDao;
 import com.emilindadie.exception.ErrorException;
 import com.emilindadie.model.User;
+import com.emilindadie.validator.UserValidator;
 
 
 @Service()
@@ -16,11 +17,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
     private PasswordEncoder passwordEncoder;
+	
+	@Autowired UserValidator validator;
 
 	@Override
 	public User signUpUser(User user) throws ErrorException {
-		System.out.println("Onnne");
-		if(user.validProperty()) {
+		if(validator.isValid(user)) {
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			return dao.save(user);
 		} 
@@ -34,23 +36,16 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User signInUser(String email, String password) throws ErrorException {
-		if(validSignInUserValue(email, password)) {
-			System.out.println(email);
-			System.out.println(password);
-			User loginUser = dao.findByEmail(email);
-			System.out.println(loginUser.getPassword());
-			if(loginUser != null && passwordEncoder.matches(password, loginUser.getPassword())) {
-				return loginUser;  
+	public User signInUser(User user) throws ErrorException {
+		if(validator.isvalidSignIn(user)) {
+			User loginUser = dao.findByEmail(user.getEmail());
+			if(loginUser != null && !loginUser.getName().isEmpty() && passwordEncoder.matches(user.getPassword(), loginUser.getPassword())) {
+				System.out.println("not exception");
+				return loginUser;
 			}
 			throw new ErrorException("failed to login", "Wrong email or password");
 		} else {
 			throw new ErrorException("failed to login", "Email and password is required");
 		}
-	}
-
-	@Override
-	public Boolean validSignInUserValue(String email, String password) {
-		return !email.isEmpty() && !password.isEmpty();
 	}
 }

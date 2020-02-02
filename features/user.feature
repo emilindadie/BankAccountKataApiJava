@@ -13,7 +13,7 @@ Feature: User Catalog
       | address     | 14 rue de Mulhouse      |
       | password    | azerty                  |
  
-  @Catalog
+   @Catalog
   Scenario Outline: Login to the system
     Given a user of email <email> and of password <password>
     When he want to signin to the system

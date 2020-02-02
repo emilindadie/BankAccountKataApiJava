@@ -6,6 +6,5 @@ import com.emilindadie.model.User;
 public interface UserService {
 	User signUpUser(User user) throws ErrorException;
 	User getUser();
-	User signInUser(String email, String password) throws ErrorException;
-	Boolean validSignInUserValue(String email, String password);
+	User signInUser(User user) throws ErrorException;
 }

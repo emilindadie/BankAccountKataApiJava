@@ -11,7 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-public class SignInDto {
-	String email;
-	String password;
+public class UserDto{
+    private String name = "";
+    private String email = "";
+    private String password = "";
+    private String address = "";
 }

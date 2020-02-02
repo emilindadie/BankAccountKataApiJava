@@ -9,9 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.emilindadie.mapper.UserMapper;
+import com.emilindadie.validator.UserValidator;
+
 @SpringBootApplication
 @Configuration
-@EnableJpaRepositories
 public class BankAccountKataApiApplication {
 
 	public static void main(String[] args) {
@@ -32,5 +34,14 @@ public class BankAccountKataApiApplication {
 	        }
 	    };
 	}
-
+	
+	@Bean
+	public UserMapper userMapper() {
+		return new UserMapper();
+	}
+	
+	@Bean
+	public UserValidator userValidator() {
+		return new UserValidator();
+	}
 }

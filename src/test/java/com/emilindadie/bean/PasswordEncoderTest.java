@@ -21,7 +21,6 @@ public class PasswordEncoderTest {
 	public void setUp() throws Exception {
 	}
 	
-	
 	@Test
 	public void should_return_encoded_password_when_having_password(){
 		// Arrange

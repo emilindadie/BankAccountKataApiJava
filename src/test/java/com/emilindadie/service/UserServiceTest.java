@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.emilindadie.dao.UserDao;
@@ -29,6 +30,9 @@ public class UserServiceTest {
 	
 	@MockBean
 	UserDao dao;
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
 	@Before
 	public void setUp() throws Exception {
@@ -70,10 +74,10 @@ public class UserServiceTest {
 		String password = "azerty";
 		User user = new User();
 		user.setId(1);
-				
+		user.setPassword(passwordEncoder.encode(password));
         Mockito.when(dao.findByEmail(email)).thenReturn(user);
 		try {
-	        User signInUser = service.signInUser(email, password);
+	        User signInUser = service.signInUser(user);
 	        Assertions.assertThat(signInUser.getId()).isNotNull();
 		} catch(ErrorException e) {
 		}
@@ -82,7 +86,7 @@ public class UserServiceTest {
 	@Test
 	public void should_throw_an_exception_when_having_invalid_signin_user_value(){
 		try {
-	        User signInUser = service.signInUser("", "");
+	        User signInUser = service.signInUser(new User());
 	        Assertions.assertThat(signInUser.getId()).isNotNull();
 		} catch(ErrorException e) {
 	        Assertions.assertThat(e instanceof ErrorException);
