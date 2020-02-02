@@ -14,10 +14,6 @@ import com.emilindadie.dao.UserDao;
 import com.emilindadie.exception.ErrorException;
 import com.emilindadie.model.User;
 import com.emilindadie.service.UserService;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.assertj.core.api.Assertions;
 
 

@@ -1,13 +1,11 @@
 package cucumber.stepdefs;
 
-import io.restassured.response.Response;
 
 import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.emilindadie.model.User;
 @Getter
 public enum StepDefsContext {
 
