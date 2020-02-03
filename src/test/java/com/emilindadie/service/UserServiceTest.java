@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -19,7 +20,7 @@ import org.assertj.core.api.Assertions;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceTest implements PasswordEncoder {
 
 	@Autowired 
 	UserService service;
@@ -27,9 +28,6 @@ public class UserServiceTest {
 	@MockBean
 	UserDao dao;
 	
-	@Autowired
-    private PasswordEncoder passwordEncoder;
-
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -70,7 +68,7 @@ public class UserServiceTest {
 		String password = "azerty";
 		User user = new User();
 		user.setId(1);
-		user.setPassword(passwordEncoder.encode(password));
+		user.setPassword(this.encode(password));
         Mockito.when(dao.findByEmail(email)).thenReturn(user);
 		try {
 	        User signInUser = service.signInUser(user);
@@ -87,5 +85,15 @@ public class UserServiceTest {
 		} catch(ErrorException e) {
 	        Assertions.assertThat(e instanceof ErrorException);
 		}
+	}
+
+	@Override
+	public String encode(CharSequence rawPassword) {
+        return BCrypt.hashpw(rawPassword.toString(), BCrypt.gensalt(4));
+	}
+
+	@Override
+	public boolean matches(CharSequence rawPassword, String encodedPassword) {
+        return BCrypt.checkpw(rawPassword.toString(), encodedPassword);
 	}
 }

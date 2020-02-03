@@ -3,21 +3,14 @@ package com.emilindadie.mapper;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import com.emilindadie.dto.SignInDto;
 import com.emilindadie.dto.UserDto;
 import com.emilindadie.model.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+
 public class UserMapperTest {
 
-	@Autowired 
-	UserMapper mapper;
+	UserMapper mapper = new UserMapper();
 
 	@Before
 	public void setUp() throws Exception {

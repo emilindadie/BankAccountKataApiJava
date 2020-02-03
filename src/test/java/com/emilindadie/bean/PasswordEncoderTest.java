@@ -3,20 +3,12 @@ package com.emilindadie.bean;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
-public class PasswordEncoderTest {
-	
-	
-	@Autowired 
-	PasswordEncoder passwordEncoder;
 
+public class PasswordEncoderTest implements PasswordEncoder{
+	
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -27,7 +19,7 @@ public class PasswordEncoderTest {
 		String password = "azerty";
 		
 		// Act
-		String encodedPassword = passwordEncoder.encode(password);
+		String encodedPassword = this.encode(password);
 		
 		// Assert
 	    Assertions.assertThat(password).isNotEqualTo(encodedPassword);
@@ -36,10 +28,20 @@ public class PasswordEncoderTest {
 	@Test
 	public void should_return_true_when_having_password_matching_with_encoded_password(){
 		String password = "azerty";
-		String encodedPassword = passwordEncoder.encode(password);
+		String encodedPassword = this.encode(password);
 		
-		Boolean isPasswordMatch = passwordEncoder.matches(password, encodedPassword);
+		Boolean isPasswordMatch = this.matches(password, encodedPassword);
 		
 	    Assertions.assertThat(isPasswordMatch).isEqualTo(true);
+	}
+
+	@Override
+	public String encode(CharSequence rawPassword) {
+        return BCrypt.hashpw(rawPassword.toString(), BCrypt.gensalt(4));
+	}
+
+	@Override
+	public boolean matches(CharSequence rawPassword, String encodedPassword) {
+        return BCrypt.checkpw(rawPassword.toString(), encodedPassword);
 	}
 }
