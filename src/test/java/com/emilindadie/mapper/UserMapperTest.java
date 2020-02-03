@@ -12,12 +12,10 @@ import com.emilindadie.dto.SignInDto;
 import com.emilindadie.dto.UserDto;
 import com.emilindadie.model.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+
 public class UserMapperTest {
 
-	@Autowired 
-	UserMapper mapper;
+	UserMapper mapper = new UserMapper();
 
 	@Before
 	public void setUp() throws Exception {

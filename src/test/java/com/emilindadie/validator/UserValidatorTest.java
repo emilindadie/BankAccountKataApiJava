@@ -3,19 +3,13 @@ package com.emilindadie.validator;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.emilindadie.model.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+
 public class UserValidatorTest {
 
-	@Autowired 
-	UserValidator validator;
+	UserValidator validator = new UserValidator();
 
 	@Before
 	public void setUp() throws Exception {
