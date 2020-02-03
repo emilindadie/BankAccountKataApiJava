@@ -2,4 +2,4 @@ language: java
 jdk:
  - openjdk8
 script:
-- ./mvnw clean install -P prod -B
+- ./mvnw clean test -P prod
