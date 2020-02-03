@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.emilindadie</groupId>
-	<artifactId>bootstrap-cucumber-spring</artifactId>
+	<artifactId>banka-account-kata-api-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>bootstrap-cucumber-spring</description>
