@@ -150,7 +150,6 @@
 				<configuration>
 					<excludes>
 						<exclude>**/*com/emilindadie/model/**</exclude>
-						<exclude>**/*com/newlight77/bootstrap/exception/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
@@ -225,5 +224,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
