@@ -1,9 +1,6 @@
-sudo: required
 language: java
 jdk: openjdk8
+before_install:
+- chmod +x mvn
 script:
-- ./mvnw clean install -P dev -B
-- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent
-
-cache:
-  directories: '$HOME/.m2/repository'
+- ./mvnw clean install
