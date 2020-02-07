@@ -1,6 +1,9 @@
 package com.emilindadie.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +13,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -34,4 +39,10 @@ public class User implements Serializable {
     private String password;
 	@Column()
     private String address;
+	
+	
+	 @OneToMany
+	 @JoinColumn(name = "user_id")
+    private List<Account> accounts = new ArrayList<>();
+
 }
