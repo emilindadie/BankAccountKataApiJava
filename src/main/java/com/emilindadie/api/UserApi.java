@@ -16,7 +16,7 @@ import com.emilindadie.exception.ErrorException;
 import com.emilindadie.mapper.UserMapper;
 import com.emilindadie.model.ApiResponse;
 import com.emilindadie.model.User;
-import com.emilindadie.service.UserService;
+import com.emilindadie.service.user.UserService;
 
 @RestController
 @RequestMapping("/user")

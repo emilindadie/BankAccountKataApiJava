@@ -15,9 +15,8 @@ import cucumber.api.java.en.When;
 import cucumber.config.SpringIntegrationTest;
 import lombok.extern.java.Log;
 
-
 @Log
-public class StepdefsUserSignIn extends SpringIntegrationTest {
+public class StepdefsUserSignIn {
 
     @LocalServerPort
     private int port;

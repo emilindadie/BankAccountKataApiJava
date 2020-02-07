@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,9 +42,6 @@ public class User implements Serializable {
 	@Column()
     private String address;
 	
-	
-	 @OneToMany
-	 @JoinColumn(name = "user_id")
+	@OneToMany(mappedBy="user")
     private List<Account> accounts = new ArrayList<>();
-
 }
