@@ -3,10 +3,7 @@ package com.emilindadie.validator;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
-<<<<<<< HEAD
-=======
 
->>>>>>> account
 import com.emilindadie.model.User;
 
 
