@@ -1,4 +1,4 @@
-package com.emilindadie.service;
+package com.emilindadie.service.user;
 
 import com.emilindadie.exception.ErrorException;
 import com.emilindadie.model.User;

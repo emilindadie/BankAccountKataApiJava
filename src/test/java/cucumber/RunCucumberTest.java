@@ -16,7 +16,8 @@ import org.junit.runner.RunWith;
             "features"
     },
     glue = {
-        "cucumber/config"
+        "cucumber/config",
+    	"cucumber/stepdefs"
     },
 	tags = {
             "@Catalog"

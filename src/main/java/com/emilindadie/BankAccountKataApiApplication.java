@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.emilindadie.mapper.AccountMapper;
 import com.emilindadie.mapper.UserMapper;
+import com.emilindadie.validator.AccountValidator;
 import com.emilindadie.validator.UserValidator;
 
 @SpringBootApplication
@@ -41,5 +43,15 @@ public class BankAccountKataApiApplication {
 	@Bean
 	public UserValidator userValidator() {
 		return new UserValidator();
+	}
+	
+	@Bean
+	public AccountMapper accountMapper() {
+		return new AccountMapper();
+	}
+	
+	@Bean
+	public AccountValidator accountValidator() {
+		return new AccountValidator();
 	}
 }

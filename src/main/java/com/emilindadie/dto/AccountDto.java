@@ -11,10 +11,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-public class UserDto{
-	private int id = 0;
-    private String name = "";
-    private String email = "";
-    private String password = "";
-    private String address = "";
+public class AccountDto {
+	 	private String name = "";
+	    private int solde = 0;
+	    private UserDto user;
 }

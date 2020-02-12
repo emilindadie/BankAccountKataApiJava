@@ -14,7 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.emilindadie.dao.UserDao;
 import com.emilindadie.exception.ErrorException;
 import com.emilindadie.model.User;
-import com.emilindadie.service.UserService;
+import com.emilindadie.service.user.UserService;
+
 import org.assertj.core.api.Assertions;
 
 

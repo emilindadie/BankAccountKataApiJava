@@ -11,6 +11,7 @@ public class UserMapper implements GenericMapper<UserDto, User>{
 	@Override
 	public User map(UserDto dto) {
 		return User.builder()
+				.id(dto.getId())
 				.name(dto.getName())
                 .email(dto.getEmail())
                 .address(dto.getAddress())
