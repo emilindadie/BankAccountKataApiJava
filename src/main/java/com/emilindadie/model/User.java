@@ -15,8 +15,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -38,10 +39,12 @@ public class User implements Serializable {
 	@Column()
     private String email;
 	@Column()
+	@JsonIgnore
     private String password;
 	@Column()
     private String address;
 	
-	@OneToMany(mappedBy="user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Account> accounts = new ArrayList<>();
 }

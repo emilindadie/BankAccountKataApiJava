@@ -1,7 +1,5 @@
 package com.emilindadie.dto;
 
-import com.emilindadie.dto.UserDto.UserDtoBuilder;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

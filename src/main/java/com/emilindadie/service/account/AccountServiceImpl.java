@@ -1,5 +1,7 @@
 package com.emilindadie.service.account;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,10 @@ public class AccountServiceImpl implements AccountService {
 			return dao.save(account);
 		}
 		throw new ErrorException("failed to create account", "Name field are requiered");	
+	}
+
+	@Override
+	public List<Account> accountsByUserId(int id) {
+		return dao.findByUserId(id);
 	}
 }

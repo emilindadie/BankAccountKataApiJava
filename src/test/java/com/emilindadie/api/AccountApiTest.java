@@ -1,5 +1,8 @@
 package com.emilindadie.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,5 +64,19 @@ public class AccountApiTest {
 	        Assertions.assertThat(createAccountResponse.getStatusCodeValue()).isEqualTo(201);
 		} catch(ErrorException e) {
 		}
+	}
+	
+	@Test
+	public void should_get_all_user_accounts_when_having_userId(){
+		int userId = 1;
+		
+		List<Account> accounts = new ArrayList<Account>();
+		accounts.add(Account.builder().name("Compte A").build());
+		
+        Mockito.when(service.accountsByUserId(userId)).thenReturn(accounts);
+
+        ResponseEntity<ApiResponse<List<Account>>> getAccountResponse = api.getAccounts(userId);
+        
+        Assertions.assertThat(getAccountResponse.getStatusCodeValue()).isEqualTo(200);
 	}
 }

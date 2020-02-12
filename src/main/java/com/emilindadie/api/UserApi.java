@@ -19,7 +19,7 @@ import com.emilindadie.model.User;
 import com.emilindadie.service.user.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserApi {
 
 	@Autowired
